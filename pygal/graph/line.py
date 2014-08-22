@@ -149,6 +149,11 @@ class Line(Graph):
 
         self._y_labels = list(zip(map(self._format, y_pos), y_pos))
 
+    def _has_data(self):
+        """Check if there is any data"""
+        return sum(
+            map(len, map(lambda s: s.safe_values, self.series))) != 0
+        
     def _plot(self):
         for serie in self.series:
             self.line(serie)

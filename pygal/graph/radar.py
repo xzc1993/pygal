@@ -189,3 +189,9 @@ class Radar(Line):
 
         self.x_pos = x_pos
         self._self_close = True
+
+    def _has_data(self):
+        """Check if there is any data"""
+        return sum(
+            map(len, map(lambda s: s.safe_values, self.series))) != 0 and (
+            sum(map(abs, self._values )) != 0)

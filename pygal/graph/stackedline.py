@@ -55,8 +55,8 @@ class StackedLine(Line):
                 else:
                     serie.interpolated = []
 
-    def _plot(self):
-        for serie in self.series[::-1 if self.stack_from_top else 1]:
-            self.line(serie)
-        for serie in self.secondary_series[::-1 if self.stack_from_top else 1]:
-            self.line(serie, True)
+    def _has_data(self):
+        """Check if there is any data"""
+        return sum(
+            map(len, map(lambda s: s.safe_values, self.series))) != 0 and (
+            sum(map(abs, self._values )) != 0)
