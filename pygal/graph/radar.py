@@ -27,6 +27,7 @@ from pygal.adapters import positive, none_to_zero
 from pygal.view import PolarView, PolarLogView
 from pygal.util import deg, cached_property, compute_scale, majorize, cut
 from math import cos, pi
+from pygal.graph.base import BaseGraph
 
 
 class Radar(Line):

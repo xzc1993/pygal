@@ -23,6 +23,7 @@ Stacked Line chart
 from __future__ import division
 from pygal.graph.line import Line
 from pygal.adapters import none_to_zero
+from pygal.graph.base import BaseGraph
 
 
 class StackedLine(Line):
@@ -54,6 +55,12 @@ class StackedLine(Line):
                     serie.interpolated = self._interpolate(x_pos, accumulation)
                 else:
                     serie.interpolated = []
+
+    def _plot(self):
+        for serie in self.series[::-1 if self.stack_from_top else 1]:
+            self.line(serie)
+        for serie in self.secondary_series[::-1 if self.stack_from_top else 1]:
+            self.line(serie, True)
 
     def _has_data(self):
         """Check if there is any data"""
